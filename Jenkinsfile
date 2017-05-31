@@ -2,13 +2,13 @@
 pipeline {
     agent {
         dockerfile true
+	label ${BUILD_ID}
     }
 
     stages {
         stage('build') {
             steps {
-		sh 'id'
-                sh 'mvn -f server/pom.xml clean package'
+                sh 'make build'
                 archiveArtifacts 'server/target/*jar'
             }
         }
