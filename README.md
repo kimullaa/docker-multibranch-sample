@@ -1,14 +1,11 @@
 # docker-multibranch-sample
 
 ## 方針
-ビルドはDockerコンテナ上で実施する
-
-```
-make -f Makefile.docker help
-```
+ビルドはDockerコンテナ上で実施する。
+Dockerコンテナの管理はJenkinsfileに記述した docker pipeline plugin で行う。
 
 ## 注意事項
-ビルド用のDockerイメージはdindに対応してないので、JenkinsはDockerで起動しないこと
+scripted syntax で記述しています。
 
 ## ファイル一覧
 
@@ -17,4 +14,3 @@ make -f Makefile.docker help
 | Dockerfile.build      |ビルドサーバを構築するためのDockerfile                  | 
 | Dockerfile.integration|結合試験を実施するためののDockerfile                    | 
 | Makefile              |開発時にローカル環境で利用するコマンドをまとめたMakefile| 
-| Makefile.docker       |dockerコンテナを操作するためのコマンドをまとめたMakefile| 
