@@ -1,7 +1,8 @@
 # docker-multibranch-sample
 
 ## 方針
-ビルドはDockerコンテナ上で実施する
+* Thin Server Architecture（クライアント側はVuejs、サーバ側はSpringBoot）
+* ビルド・静的解析・単体テストはDockerコンテナ上で実施する
 
 ```
 make -f Makefile.docker help
