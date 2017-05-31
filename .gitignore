@@ -1,0 +1,9 @@
+client/node_modules
+client/dist
+
+server/target
+server/*.iml
+server/.idea/
+server/src/main/resources/static
+
+*.swp

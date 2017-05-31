@@ -1,0 +1,12 @@
+# https://pkgs.alpinelinux.org/packages
+# ビルドサーバ用のコンテナイメージを作成する
+# 各種資材のビルドにはMakefileを利用する
+
+FROM openjdk:8u131-jdk-alpine
+
+RUN apk update && apk upgrade && \
+    apk add nodejs-npm=6.10.3-r0 maven=3.3.9-r1 make
+WORKDIR /build
+COPY . /build
+ENTRYPOINT ["make"]
+CMD ["help"]
