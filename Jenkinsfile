@@ -1,10 +1,9 @@
 #!groovy
 node {
+    stage('checkout') {
+        checkout scm
+    }
     docker.build("${BUILD_ID}", "-f Dockerfile.build .").withRun() {
-        stage('checkout') {
-            checkout scm
-        }
-
         stage('build') {
             sh 'make build'
             archiveArtifacts 'server/target/*jar'
