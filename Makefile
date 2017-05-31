@@ -12,8 +12,8 @@ setup:
 	npm --prefix client install
 
 build: setup
-	#npm --prefix client run build
-	#cp -R client/dist/* server/src/main/resources/static
+	npm --prefix client run build
+	cp -R client/dist/* server/src/main/resources/static
 	mvn -f server/pom.xml package -DskipTests=true
 
 clean:
