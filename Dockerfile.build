@@ -5,8 +5,12 @@
 FROM openjdk:8u131-jdk-alpine
 
 RUN apk update && apk upgrade && \
-    apk add nodejs-npm=6.10.3-r0 maven=3.3.9-r1 make
+    apk add curl nodejs-npm=6.10.3-r0 maven=3.3.9-r1 make
+
+# デフォルトだとalpineでphantomjs使えないので対処(https://github.com/dustinblackman/phantomized)
+RUN curl -Ls "https://github.com/dustinblackman/phantomized/releases/download/2.1.1/dockerized-phantomjs.tar.gz" | tar xz -C /
 WORKDIR /build
 COPY . /build
+
 ENTRYPOINT ["make"]
 CMD ["help"]

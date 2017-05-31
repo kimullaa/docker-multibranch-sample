@@ -4,7 +4,7 @@
 ID = 'default'
 BUILD_SERVER_IMAGE = sample-base-build-server-$(ID)
 BUILD_CONTAINER    = sample-build-$(ID)
-TEST_CONTAINER     = sample-unit-$(ID)
+UNIT_CONTAINER     = sample-unit-$(ID)
 LINT_CONTAINER     = sample-lint-$(ID)
 
 # ホスト側にライブラリをキャッシュするために以下ディレクトリを起動時にマウントする
@@ -20,6 +20,7 @@ help:
 	@echo "--------------------------------------------------------"
 
 base:
+	make clean
 	docker build -t $(BUILD_SERVER_IMAGE) -f Dockerfile.build .
 
 build: base
@@ -32,13 +33,13 @@ clean:
 	docker rm $$(docker ps -aq -f name=sample.*$(ID)) || true
 
 unit: base
-	docker run -it --name $(TEST_CONTAINER) -v $(CACHE_PATH)/.m2:/root/.m2 -v $(CACHE_PATH)/.node_modules:/build/client/node_modules $(BUILD_SERVER_IMAGE) unit
-	docker cp $(TEST_CONTAINER):/build/server/target server/target
-	docker cp $(LINT_CONTAINER):/build/client/unit/report client/unit/report
-	docker rm $(TEST_CONTAINER)
+	docker run -it --name $(UNIT_CONTAINER) -v $(CACHE_PATH)/.m2:/root/.m2 -v $(CACHE_PATH)/.node_modules:/build/client/node_modules $(BUILD_SERVER_IMAGE) unit
+	docker cp $(UNIT_CONTAINER):/build/server/target server/target
+	docker cp $(UNIT_CONTAINER):/build/client/test/report client/test/report
+	docker rm $(UNIT_CONTAINER)
 
 lint: base
 	docker run -it --name $(LINT_CONTAINER) -v $(CACHE_PATH)/.m2:/root/.m2 -v $(CACHE_PATH)/.node_modules:/build/client/node_modules $(BUILD_SERVER_IMAGE) lint
 	docker cp $(LINT_CONTAINER):/build/server/target server/target
-	docker cp $(LINT_CONTAINER):/build/client/unit/report client/unit/report
+	docker cp $(LINT_CONTAINER):/build/client/test/report client/test/report
 	docker rm $(LINT_CONTAINER)
