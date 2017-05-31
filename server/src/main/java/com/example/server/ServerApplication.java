@@ -10,10 +10,7 @@ public class ServerApplication {
 		SpringApplication.run(ServerApplication.class, args);
 
 		// for findbugs
-		String msg = "hello";
-		switch(msg) {
-			case "hello": ;
-			case "good": ;
-		}
+		String text =null;
+		System.out.println(text.length());
 	}
 }
