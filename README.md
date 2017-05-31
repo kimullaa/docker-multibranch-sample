@@ -7,6 +7,9 @@
 make -f Makefile.docker help
 ```
 
+## 注意事項
+ビルド用のDockerイメージはdindに対応してないので、JenkinsはDockerで起動しないこと
+
 ## ファイル一覧
 
 | ファイル              | 説明                                                   |  
