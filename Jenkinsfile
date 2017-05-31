@@ -8,8 +8,7 @@ pipeline {
         stage('build') {
             steps {
 		sh 'id'
-		sh 'whoami'
-                sh 'make build'
+                sh 'mvn clean package'
                 archiveArtifacts 'server/target/*jar'
             }
         }
