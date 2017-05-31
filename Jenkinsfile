@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                git 'https://github.com/kimullamen/docker-multibranch-sample.git'
+                checkout scm
             }
         }
         stage('build') {
