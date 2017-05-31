@@ -6,15 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ServerApplication {
 
-        /**
-         * @params arg for findbugs
-         */
 	public static void main(String[] args) {
 		SpringApplication.run(ServerApplication.class, args);
 
+		// for findbugs
 		String msg = "hello";
 		switch(msg) {
-			case "hello": return;
+			case "hello": ;
+			case "good": ;
 		}
 	}
 }
