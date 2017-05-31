@@ -48,7 +48,6 @@
 	</dependencies>
 
 	<build>
-		<!-- 各phase実行時に実行すると遅くなるため、<executions>は設定しない -->
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -75,6 +74,22 @@
 					<groupId>org.jacoco</groupId>
 					<artifactId>jacoco-maven-plugin</artifactId>
 					<version>0.7.9</version>
+					<executions>
+						<execution>
+							<id>prepare-agent</id>
+							<phase>test-compile</phase>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>report</id>
+							<phase>prepare-package</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -90,6 +105,10 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
