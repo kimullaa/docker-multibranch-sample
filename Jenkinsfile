@@ -7,6 +7,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
+		sh 'id'
                 sh 'make build'
                 archiveArtifacts 'server/target/*jar'
             }
