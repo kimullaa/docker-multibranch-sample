@@ -8,6 +8,7 @@ pipeline {
         stage('build') {
             steps {
 		sh 'id'
+		sh 'whoami'
                 sh 'make build'
                 archiveArtifacts 'server/target/*jar'
             }
