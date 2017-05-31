@@ -3,7 +3,7 @@ node {
     stage('checkout') {
         checkout scm
     }
-    docker.build("${BUILD_ID}", "-f Dockerfile.build .").withRun() {
+    docker.build("${BUILD_ID}", "-f Dockerfile.build .").inside('-u root') {
         stage('build') {
             sh 'make build'
             archiveArtifacts 'server/target/*jar'
