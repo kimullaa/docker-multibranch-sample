@@ -11,6 +11,3 @@ RUN apk update && apk upgrade && \
 RUN curl -Ls "https://github.com/dustinblackman/phantomized/releases/download/2.1.1/dockerized-phantomjs.tar.gz" | tar xz -C /
 WORKDIR /build
 COPY . /build
-
-ENTRYPOINT ["make"]
-CMD ["help"]

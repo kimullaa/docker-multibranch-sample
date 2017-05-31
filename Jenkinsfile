@@ -1,22 +1,17 @@
 #!groovy
 pipeline {
-    agent any
+    agent dockerfile true
 
     stages {
-        stage('checkout') {
-            steps {
-                git 'https://github.com/kimullamen/docker-multibranch-sample.git'
-            }
-        }
         stage('build') {
             steps {
-                sh 'make ID=${BUILD_ID} -f Makefile.docker build'
+                sh 'make build'
                 archiveArtifacts 'server/target/*jar'
             }
         }
         stage('unit') {
             steps {
-                sh 'make ID=${BUILD_ID} -f Makefile.docker unit'
+                sh 'make unit'
                 junit 'server/target/surefire-reports/*.xml'
                 jacoco()
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'client/test/report/coverage/lcov-report/', reportFiles: 'index.html', reportName: 'カバレッジ（クライアント）', reportTitles: ''])
@@ -25,7 +20,7 @@ pipeline {
         }
         stage('lint') {
             steps {
-                sh 'make ID=${BUILD_ID} -f Makefile.docker lint'
+                sh 'make lint'
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'client/test/report/eslint/', reportFiles: 'index.html', reportName: 'ESLint', reportTitles: ''])
                 findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: 'server/target/findbugsXml.xml', unHealthy: ''
                 checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'server/target/checkstyle-result.xml', unHealthy: ''
