@@ -1,6 +1,6 @@
 #!groovy
 node {
-    docker.build(image: "${BUILD_ID}", args: "-f Dockerfile.build").withRun() {
+    docker.build("${BUILD_ID}", "-f Dockerfile.build").withRun() {
 
         stage('build') {
             sh 'make build'
