@@ -1,8 +1,8 @@
 # docker-multibranch-sample
 
 ## 方針
-ビルドはDockerコンテナ上で実施する。
-Dockerコンテナの管理はJenkinsfileに記述した docker pipeline plugin で行う。
+* ビルドはDockerコンテナ上で実施する。
+* Dockerコンテナの管理はJenkinsfileに記述した docker pipeline plugin で行う。
 
 ## 注意事項
 scripted syntax で記述しています。
