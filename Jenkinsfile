@@ -8,7 +8,7 @@ pipeline {
         stage('build') {
             steps {
 		sh 'id'
-                sh 'mvn clean package'
+                sh 'mvn -f server/pom.xml clean package'
                 archiveArtifacts 'server/target/*jar'
             }
         }
