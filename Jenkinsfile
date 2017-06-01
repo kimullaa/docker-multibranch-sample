@@ -37,6 +37,7 @@ node {
     }
 
     stage('clean') {
+        //ゴミが残ってもいやなので毎回workspaceを空にする
         deleteDir()
     }
 
