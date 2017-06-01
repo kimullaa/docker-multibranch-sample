@@ -4,11 +4,13 @@ pipeline {
     agent {
         dockerfile {
             filename 'Dockerfile.build'
+            // agentの前に事前処理をはさみこむのがめんどくさそうなので、node_modulesもgit管理する
             args '-v /tmp/docker/cache/.m2:/var/maven/.m2 -v /tmp/docker/cache/.node_modules:${WORKSPACE}/client/node_modules'
         }
     }
 
     environment {
+        // npmのパーミッションエラー防止
         npm_config_cache='npm-cache'
     }
 
