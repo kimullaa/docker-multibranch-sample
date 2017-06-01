@@ -53,9 +53,11 @@ pipeline {
 
     post {
         always {
-            //ゴミが残ってもいやなので毎回workspaceを空にする
-            sleep 5
-            deleteDir()
+            steps {
+                //ゴミが残ってもいやなので毎回workspaceを空にする
+                sleep 5
+                deleteDir()
+            }
         } 
         failure {
             echo 'send mail or chat'
