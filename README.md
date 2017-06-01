@@ -14,6 +14,7 @@
 ## 注意事項
 * declarative pipeline で記述しています。
 * ビルド用のDockerイメージはdindに対応してないので、本コマンドを実行する環境はDockerで起動しないこと。
+* /tmp/docker/cache/.m2 と /tmp/docker/cache/node_modules をjenkins実行ユーザで作成してください
 
 
 ## ファイル一覧
