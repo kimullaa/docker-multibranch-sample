@@ -54,6 +54,7 @@ pipeline {
     post {
         always {
             //ゴミが残ってもいやなので毎回workspaceを空にする
+            sleep time: 5 unit: SECONDS
             deleteDir()
         } 
         failure {
