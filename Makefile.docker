@@ -6,6 +6,7 @@ BUILD_SERVER_IMAGE = sample-base-build-server-$(ID)
 BUILD_CONTAINER    = sample-build-$(ID)
 UNIT_CONTAINER     = sample-unit-$(ID)
 LINT_CONTAINER     = sample-lint-$(ID)
+CLEAN_CONTAINER    = sample-clean-$(ID)
 
 # ホスト側にライブラリをキャッシュするために以下ディレクトリを起動時にマウントする
 CACHE_PATH='/tmp/docker/cache'
@@ -22,7 +23,6 @@ help:
 	@echo "--------------------------------------------------------"
 
 base:
-	make clean
 	docker build -t $(BUILD_SERVER_IMAGE) -f Dockerfile.build .
 	mkdir -p /tmp/docker/cache/.m2 || true
 	mkdir -p /tmp/docker/cache/.node_modules || true
@@ -32,6 +32,7 @@ build: base
 	docker rm $(BUILD_CONTAINER)
 
 clean:
+	docker run --name $(BUILD_CONTAINER) -u $$(id -u):$$(id -g) -e npm_config_cache=npm-cache -w $$(pwd) -v $$(pwd):$$(pwd) -v $(CACHE_PATH)/.m2:/var/maven/.m2 -v $(CACHE_PATH)/.node_modules:$$(pwd)/client/node_modules $(BUILD_SERVER_IMAGE) clean || docker rm $(BUILD_CONTAINER)
 	docker rmi $$(docker images -f dangling=true -q) || true
 	docker rm $(LINT_CONTAINER) || true
 	docker rm $(UNIT_CONTAINER) || true
