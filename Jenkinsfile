@@ -14,7 +14,7 @@ pipeline {
     }
 
     stages {
-        // このstageもコンテナ内で実行されるので意味ない
+        // このstageもコンテナ内で実行されるので意味ない。スレーブ作成時に作っとく
         // stage('prepare') {
         //     steps {
         //         // https://github.com/moby/moby/issues/2259
@@ -50,12 +50,12 @@ pipeline {
         }
     }
 
-     // postがコンテナ内で実行されるため、コンテナ内にマウントされたボリュームを消そうとしてエラーになる
-     post {
-         always {
-             //ゴミが残ってもいやなので毎回workspaceを空にする
-             deleteDir()
-         } 
-     }
+     // postがコンテナ内で実行されるため、コンテナ内にマウントされたボリュームを消そうとしてエラーになるっぽい
+     // post {
+     //     always {
+     //         //ゴミが残ってもいやなので毎回workspaceを空にする
+     //         deleteDir()
+     //     } 
+     // }
 
 }
