@@ -15,6 +15,7 @@ pipeline {
     }
 
     stages {
+        // このstageもコンテナ内で実行されるので意味ない
         // stage('prepare') {
         //     steps {
         //         // https://github.com/moby/moby/issues/2259
@@ -52,8 +53,8 @@ pipeline {
 
     post {
         always {
+            sh 'ip addr show'
             //ゴミが残ってもいやなので毎回workspaceを空にする
-            sleep 5
             deleteDir()
         } 
     }
