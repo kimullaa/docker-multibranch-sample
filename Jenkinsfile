@@ -6,6 +6,9 @@ node {
     CURRENT_PATH = pwd()
     docker.build("${BUILD_ID}", "-f Dockerfile.build .").inside("-u root -v /var/tmp/docker/cache/.m2:/root/.m2 -v /var/tmp/docker/cache/.node_modules:${CURRENT_PATH}/client/node_modules") {
         stage('build') {
+            sh 'pwd'
+            sh 'ls -al'
+            sh 'whoami'
             sh 'make build'
             archiveArtifacts 'server/target/*jar'
         }
