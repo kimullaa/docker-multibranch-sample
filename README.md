@@ -12,7 +12,7 @@
 * JaCoCo plugin
 
 ## 注意事項
-* scripted syntax で記述しています。
+* declarative pipeline で記述しています。
 * ビルド用のDockerイメージはdindに対応してないので、本コマンドを実行する環境はDockerで起動しないこと。
 
 
