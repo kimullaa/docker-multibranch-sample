@@ -11,7 +11,7 @@ node {
 
     CURRENT_PATH = pwd()
     // mavenはsettings.xmlでローカルリポジトリを/var/maven/.m2に設定する
-    docker.build("${JOB_NAME}-${BRANCH_NAME}-${BUILD_ID}", "-f Dockerfile.build .").inside("-v /tmp/docker/cache/.m2:/var/maven/.m2 -v /tmp/docker/cache/.node_modules:${CURRENT_PATH}/client/node_modules") {
+    docker.build("${BUILD_ID}", "-f Dockerfile.build .").inside("-v /tmp/docker/cache/.m2:/var/maven/.m2 -v /tmp/docker/cache/.node_modules:${CURRENT_PATH}/client/node_modules") {
 
         withEnv(['npm_config_cache=npm-cache']) {
             stage('build') {
