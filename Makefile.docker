@@ -8,7 +8,7 @@ UNIT_CONTAINER     = sample-unit-$(ID)
 LINT_CONTAINER     = sample-lint-$(ID)
 
 # ホスト側にライブラリをキャッシュするために以下ディレクトリを起動時にマウントする
-CACHE_PATH='/var/tmp/docker/cache'
+CACHE_PATH='/tmp/docker/cache'
 
 help:
 	@echo "--------------------------------------------------------"
