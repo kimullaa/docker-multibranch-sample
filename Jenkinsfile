@@ -37,7 +37,9 @@ pipeline {
         }
 
         stage('clean') {
-            deleteDir()
+            steps {
+                deleteDir()
+            }
         }
     }
 }
