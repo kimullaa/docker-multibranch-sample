@@ -24,7 +24,7 @@ pipeline {
             }
         }
         stage('build') {
-            steps() {
+            steps {
                 sh 'make build'
                 archiveArtifacts 'server/target/*jar'
             }
@@ -48,20 +48,19 @@ pipeline {
                 checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'server/target/checkstyle-result.xml', unHealthy: ''
             }
         }
-        
-    }
-
-    post {
-        always {
-            steps {
-                //ゴミが残ってもいやなので毎回workspaceを空にする
-                sleep 5
-                deleteDir()
+        post {
+            always {
+                steps {
+                    //ゴミが残ってもいやなので毎回workspaceを空にする
+                    sleep 5
+                    deleteDir()
+                }
+            } 
+            failure {
+                echo 'send mail or chat'
             }
-        } 
-        failure {
-            echo 'send mail or chat'
         }
+        
     }
 
 }
