@@ -5,9 +5,16 @@
 * ビルド・静的解析・単体テストはDockerコンテナ上で実施する。
 * Dockerコンテナの管理はJenkinsfileに記述した docker pipeline plugin で行う。
 
+# Jenkinsのセットアップ
+以下プラグインを追加で入れてください。
+* Checkstyle Plug-in
+* FindBugs Plug-in
+* JaCoCo plugin
+
 ## 注意事項
 * scripted syntax で記述しています。
 * ビルド用のDockerイメージはdindに対応してないので、本コマンドを実行する環境はDockerで起動しないこと。
+
 
 ## ファイル一覧
 
