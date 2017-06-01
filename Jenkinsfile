@@ -1,5 +1,9 @@
 #!/usr/bin/env groovy
 node {
+
+    stage('checkout') {
+        deleteDir()
+    }
     stage('checkout') {
         checkout scm
     }
