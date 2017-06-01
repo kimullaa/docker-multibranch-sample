@@ -4,7 +4,7 @@ pipeline {
     agent {
         dockerfile {
             filename 'Dockerfile.build'
-            args "-v /tmp/docker/cache/.m2:/var/maven/.m2 -v /tmp/docker/cache/.node_modules:${WORKSPACE}/client/node_modules"
+            args '-v /tmp/docker/cache/.m2:/var/maven/.m2 -v /tmp/docker/cache/.node_modules:${WORKSPACE}/client/node_modules'
         }
     }
 
