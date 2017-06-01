@@ -4,14 +4,7 @@ pipeline {
 
     stages {
 
-        stage('setup') {
-            steps {
-                // https://github.com/moby/moby/issues/2259
-                // マウントするディレクトリがないとrootで作られるため、ディレクトリを作っておく
-                sh 'mkdir -p /tmp/docker/cache/.node_modules || true'
-                sh 'mkdir -p /tmp/docker/cache/.m2 || true'
-            }
-        }
+        // 全コマンドがrootで実行される
         stage('build') {
             steps {
                 sh 'make ID=${BUILD_ID} -f Makefile.docker build'
