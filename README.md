@@ -14,5 +14,5 @@
 | ファイル              | 説明                                                   |  
 |:----------------------|:-------------------------------------------------------|
 | Dockerfile.build      |ビルドサーバを構築するためのDockerfile                  | 
-| Dockerfile.integration|結合試験を実施するためののDockerfile                    | 
+| Dockerfile.integration|結合試験を実施するためのDockerfile                      | 
 | Makefile              |開発時にローカル環境で利用するコマンドをまとめたMakefile| 
