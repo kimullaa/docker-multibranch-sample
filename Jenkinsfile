@@ -1,4 +1,4 @@
-#!groovy
+#!/usr/bin/env groovy
 node {
     stage('checkout') {
         checkout scm
@@ -6,6 +6,8 @@ node {
     CURRENT_PATH = pwd()
     sh 'pwd'
     sh 'ip addr show'
+    sh 'ls -al'
+    sh 'whoami'
     docker.build("${BUILD_ID}", "-f Dockerfile.build .").inside("-u root -v /var/tmp/docker/cache/.m2:/root/.m2 -v /var/tmp/docker/cache/.node_modules:${CURRENT_PATH}/client/node_modules") {
         stage('build') {
             sh 'pwd'
