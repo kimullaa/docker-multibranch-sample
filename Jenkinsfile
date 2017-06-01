@@ -26,5 +26,9 @@ pipeline {
                 checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'server/target/checkstyle-result.xml', unHealthy: ''
             }
         }
+
+        stage('clean') {
+            deleteDir()
+        }
     }
 }
