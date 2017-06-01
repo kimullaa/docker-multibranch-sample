@@ -1,7 +1,8 @@
 #!/usr/bin/env groovy
 node {
 
-    stage('setup') {
+    stage('checkout') {
+        checkout scm
         // https://github.com/moby/moby/issues/2259
         // マウントするディレクトリがないとrootで作られるため、ディレクトリを作っておく
         sh 'mkdir -p /tmp/docker/cache/.node_modules || true'
