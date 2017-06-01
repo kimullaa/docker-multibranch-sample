@@ -10,6 +10,11 @@
 ```
 make -f Makefile.docker help
 ```
+# Jenkinsのセットアップ
+以下プラグインを追加で入れてください。
+* Checkstyle Plug-in
+* FindBugs Plug-in
+* JaCoCo plugin
 
 ## 注意事項
 ビルド用のDockerイメージはdindに対応してないので、本コマンドを実行する環境はDockerで起動しないこと
