@@ -3,6 +3,10 @@ node {
 
     stage('clean') {
         deleteDir()
+        # https://github.com/moby/moby/issues/2259
+        # マウントするディレクトリがないとrootで作られるため、ディレクトリを作っておく
+        sh 'mkdir -p /tmp/docker/cache/.node_modules || true'
+        sh 'mkdir -p /tmp/docker/cache/.m2 || true'
     }
     stage('checkout') {
         checkout scm
