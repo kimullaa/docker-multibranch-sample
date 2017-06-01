@@ -4,7 +4,6 @@ pipeline {
     agent {
         dockerfile {
             filename 'Dockerfile.build'
-            // agentの前に事前処理をはさみこむのがめんどくさそうなので、node_modulesもgit管理する
             args '-v /tmp/docker/cache/.m2:/var/maven/.m2 -v /tmp/docker/cache/.node_modules:${WORKSPACE}/client/node_modules'
         }
     }
@@ -51,12 +50,12 @@ pipeline {
         }
     }
 
-    // postがコンテナ内で実行されるため、コンテナ内にマウントされたボリュームを消そうとしてエラーになる
-    // post {
-    //     always {
-    //         //ゴミが残ってもいやなので毎回workspaceを空にする
-    //         deleteDir()
-    //     } 
-    // }
+     postがコンテナ内で実行されるため、コンテナ内にマウントされたボリュームを消そうとしてエラーになる
+     post {
+         always {
+             //ゴミが残ってもいやなので毎回workspaceを空にする
+             deleteDir()
+         } 
+     }
 
 }
