@@ -22,7 +22,6 @@ help:
 	@echo "--------------------------------------------------------"
 
 base:
-	make clean
 	docker build -t $(BUILD_SERVER_IMAGE) -f Dockerfile.build .
 
 build: base
