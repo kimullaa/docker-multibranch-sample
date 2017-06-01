@@ -26,7 +26,7 @@ base:
 
 build: base
 	docker run --name $(BUILD_CONTAINER) -v $(CACHE_PATH)/.m2:/root/.m2 -v $(CACHE_PATH)/.node_modules:/build/client/node_modules $(BUILD_SERVER_IMAGE) build || docker rm $(BUILD_CONTAINER)
-	docker cp $(BUILD_CONTAINER):/build/server/target server/target
+	docker cp $(BUILD_CONTAINER):/build/server/target server
 	docker rm $(BUILD_CONTAINER)
 
 clean:
@@ -37,12 +37,12 @@ clean:
 
 unit: base
 	docker run --name $(UNIT_CONTAINER) -v $(CACHE_PATH)/.m2:/root/.m2 -v $(CACHE_PATH)/.node_modules:/build/client/node_modules $(BUILD_SERVER_IMAGE) unit || docker rm $(UNIT_CONTAINER)
-	docker cp $(UNIT_CONTAINER):/build/server/target server/target
+	docker cp $(UNIT_CONTAINER):/build/server/target server
 	docker cp $(UNIT_CONTAINER):/build/client/test/report client/test/report
 	docker rm $(UNIT_CONTAINER)
 
 lint: base
 	docker run --name $(LINT_CONTAINER) -v $(CACHE_PATH)/.m2:/root/.m2 -v $(CACHE_PATH)/.node_modules:/build/client/node_modules $(BUILD_SERVER_IMAGE) lint || docker rm $(LINT_CONTAINER)
-	docker cp $(LINT_CONTAINER):/build/server/target server/target
+	docker cp $(LINT_CONTAINER):/build/server/target server
 	docker cp $(LINT_CONTAINER):/build/client/test/report client/test/report
 	docker rm $(LINT_CONTAINER)
