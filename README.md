@@ -1,11 +1,13 @@
 # docker-multibranch-sample
 
 ## 方針
-* ビルドはDockerコンテナ上で実施する。
+* Thin Server Architecture（クライアント側はVuejs、サーバ側はSpringBoot）
+* ビルド・静的解析・単体テストはDockerコンテナ上で実施する。
 * Dockerコンテナの管理はJenkinsfileに記述した docker pipeline plugin で行う。
 
 ## 注意事項
-scripted syntax で記述しています。
+* scripted syntax で記述しています。
+* ビルド用のDockerイメージはdindに対応してないので、本コマンドを実行する環境はDockerで起動しないこと。
 
 ## ファイル一覧
 
