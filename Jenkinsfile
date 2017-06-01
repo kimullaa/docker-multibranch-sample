@@ -51,12 +51,12 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            sh 'ip addr show'
-            //ゴミが残ってもいやなので毎回workspaceを空にする
-            deleteDir()
-        } 
-    }
+    // postがコンテナ内で実行されるため、コンテナ内にマウントされたボリュームを消そうとしてエラーになる
+    // post {
+    //     always {
+    //         //ゴミが残ってもいやなので毎回workspaceを空にする
+    //         deleteDir()
+    //     } 
+    // }
 
 }
