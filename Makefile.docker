@@ -24,6 +24,8 @@ help:
 base:
 	make clean
 	docker build -t $(BUILD_SERVER_IMAGE) -f Dockerfile.build .
+	mkdir /tmp/docker/cache/.m2 || true
+	mkdir /tmp/docker/cache/.node_modules || true
 
 build: base
 	docker run --name $(BUILD_CONTAINER) -u $$(id -u):$$(id -g) -e npm_config_cache=npm-cache -w $$(pwd) -v $$(pwd):$$(pwd) -v $(CACHE_PATH)/.m2:$$(echo ~)/.m2 -v $(CACHE_PATH)/.node_modules:/build/client/node_modules $(BUILD_SERVER_IMAGE) build || docker rm $(BUILD_CONTAINER)
