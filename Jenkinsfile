@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 node {
 
-    stage('checkout') {
+    stage('clean') {
         deleteDir()
     }
     stage('checkout') {
