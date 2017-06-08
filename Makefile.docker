@@ -12,6 +12,8 @@ CACHE_PATH='/var/tmp/docker/cache'
 
 help:
 	@echo "--------------------------------------------------------"
+	@echo "usage:  make -f Makefile.docker ID=<コンテナ名に付与するID> <target>"
+	@echo "--------------------------------------------------------"
 	@echo "build   コンテナ内でビルドし、成果物をローカルにコピーする"
 	@echo "unit    コンテナ内で単体テストし、成果物をローカルにコピーする"
 	@echo "lint    コンテナ内で静的解析し、成果物をローカルにコピーする"
@@ -30,7 +32,9 @@ build: base
 
 clean:
 	docker rmi $$(docker images -f dangling=true -q) || true
-	docker rm $$(docker ps -aq -f name=sample.*$(ID)) || true
+	docker rm $(LINT_CONTAINER) || true
+	docker rm $(UNIT_CONTAINER) || true
+	docker rm $(BUILD_CONTAINER) || true
 
 unit: base
 	docker run --name $(UNIT_CONTAINER) -v $(CACHE_PATH)/.m2:/root/.m2 -v $(CACHE_PATH)/.node_modules:/build/client/node_modules $(BUILD_SERVER_IMAGE) unit || docker rm $(UNIT_CONTAINER)
