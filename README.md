@@ -1,5 +1,12 @@
 # docker-multibranch-sample
 
+## 各ブランチ
+|ブランチ名             | 説明                                                   |
+|:----------------------|:-------------------------------------------------------|
+|master                 | 自作Docker管理&コンテナのワークスペースとJenkinsのworkspaceに乖離があるのでlintレポートで困る|
+|plugin                 | Docker Pipeline Pluginを使った|
+|make-makefile-great-again| Docker Pipeline Pluginを参考にmasterを改良|
+
 ## 方針
 * Thin Server Architecture（クライアント側はVuejs、サーバ側はSpringBoot）
 * ビルド・静的解析・単体テストはDockerコンテナ上で実施する
