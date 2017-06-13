@@ -1,16 +1,13 @@
 #!/usr/bin/env groovy
 node {
 
-    stage('clean') {
-        deleteDir()
+    stage('setup') {
         // https://github.com/moby/moby/issues/2259
         // マウントするディレクトリがないとrootで作られるため、ディレクトリを作っておく
         sh 'mkdir -p /tmp/docker/cache/.node_modules || true'
         sh 'mkdir -p /tmp/docker/cache/.m2 || true'
     }
-    stage('checkout') {
-        checkout scm
-    }
+
     CURRENT_PATH = pwd()
     // mavenはsettings.xmlでローカルリポジトリを/var/maven/.m2に設定する
     docker.build("${BUILD_ID}", "-f Dockerfile.build .").inside("-v /tmp/docker/cache/.m2:/var/maven/.m2 -v /tmp/docker/cache/.node_modules:${CURRENT_PATH}/client/node_modules") {
@@ -36,6 +33,10 @@ node {
                 checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'server/target/checkstyle-result.xml', unHealthy: ''
             }
         }
+    }
+
+    stage('clean') {
+        deleteDir()
     }
 
 }
